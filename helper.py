@@ -18,17 +18,17 @@ def fetch_stats(selected_user, df):
     words = []
     links = []
     emojis = []
-    for message in df['messages']:
+    """for message in df['messages']:
         words.extend(message.split())
         links.extend(extractor.find_urls(message))
-        emojis.extend([c for c in message if c in emoji.UNICODE_EMOJI['en']])
+        emojis.extend([c for c in message if c in emoji.UNICODE_EMOJI['en']])"""
 
     image_count = df['messages'].str.count('image omitted').sum()
     video_count = df['messages'].str.count('video omitted').sum()
     audio_count = df['messages'].str.count('audio omitted').sum()
     emoji_df = pd.DataFrame(Counter(emojis).most_common(len(Counter(emojis))))
 
-    return num_messages, words, image_count, video_count, audio_count, len(links), emoji_df
+    return num_messages, words, image_count, video_count, audio_count, len(links)# emoji_df
 
 def deEmojify(text):
     regrex_pattern = re.compile(pattern = "["
